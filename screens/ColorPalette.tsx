@@ -3,16 +3,17 @@ import {FlatList, StyleSheet, Text, View} from "react-native";
 import {ColorBox} from "../components/ColorBox";
 import COLORS from '../assets/Colors.json'
 import {StackHeaderProps} from '@react-navigation/stack';
+import useGetColorThemes from "../hooks/useGetColorThemes";
 
 
 
 export const ColorPaletteScreen = ({navigation , route} : StackHeaderProps) => {
-    const {title} = route.params as {title : string};
-    const themeColors = COLORS.data.find(el => el.title === title)
 
+    const {id} = route.params as {id? : string};
+    const {colorThemes , setColorThemes} = useGetColorThemes(id)
     return (
         <View style={[styles.container , styles.flex1]}>
-            <FlatList ListHeaderComponent={() => <Text style={styles.font30}>{title.replace('_' , ' ')}</Text>} keyExtractor={item => item.colorName} style={[styles.flex1]} data={themeColors?.data} renderItem={({item}) => <ColorBox colorHex={item.hexCode} textContent={item.colorName}></ColorBox>}></FlatList>
+            <FlatList ListHeaderComponent={() => <Text style={styles.font30}>{!Array.isArray(colorThemes) && colorThemes.paletteName}</Text>} keyExtractor={item => item.colorName} style={[styles.flex1]} data={!Array.isArray(colorThemes) ? colorThemes.colors : []} renderItem={({item}) => <ColorBox colorHex={item.hexCode} textContent={item.colorName}></ColorBox>}></FlatList>
         </View>
     );
 };

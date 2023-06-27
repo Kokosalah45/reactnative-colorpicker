@@ -16,7 +16,6 @@ function isColorLight(hexColor : string) {
     const b = parseInt(color.substring(4,6), 16);
     // Calculate luminance
     const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-    console.log({luminance})
     // Check if luminance is greater than 0.5
     if (luminance > 0.5) {
         return true; // color is light
