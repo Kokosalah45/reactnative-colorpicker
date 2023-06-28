@@ -20,13 +20,13 @@ export const AddColorPalette = () => {
                 <FlatList data={AvailableColors} renderItem={({item}) =>
                     <View style={{ flexDirection : "row" , justifyContent : "space-between" , alignItems : "center"  , marginBottom : 10}}>
                         <Text>{item.colorName}</Text>
-                        <Switch onChange={()=> {
-                            const targetColor = chosenColors.find(chosenColor => chosenColor.hexCode === item.hexCode );
-                            if(targetColor){
-                                setChosenColors(chosenColors.filter(chosenColor => chosenColor.hexCode !== item.hexCode))
+                        <Switch onValueChange={(value)=> {
+                            console.log({value})
+                            if(!value){
+                                setChosenColors((prev) => prev.filter(chosenColor => chosenColor.hexCode !== item.hexCode))
                                 return
                             }else{
-                                setChosenColors([...chosenColors , item])
+                                setChosenColors((prev) => [...prev , item])
                             }
                         } } value={!!chosenColors.find(chosenColor => chosenColor.hexCode === item.hexCode )} />
                     </View>
