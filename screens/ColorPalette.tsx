@@ -1,7 +1,5 @@
-import {SafeAreaView} from "react-native-safe-area-context";
 import {FlatList, StyleSheet, Text, View} from "react-native";
 import {ColorBox} from "../components/ColorBox";
-import COLORS from '../assets/Colors.json'
 import {StackHeaderProps} from '@react-navigation/stack';
 import useGetColorThemes from "../hooks/useGetColorThemes";
 

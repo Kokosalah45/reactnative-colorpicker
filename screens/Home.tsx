@@ -1,6 +1,5 @@
 import {FlatList, Pressable, Text, View , StyleSheet} from "react-native";
 import { StackHeaderProps } from '@react-navigation/stack';
-import COLORS from '../assets/Colors.json'
 import {ColorBox} from "../components/ColorBox";
 import {useCallback, useEffect, useState} from "react";
 import useGetColorThemes from "../hooks/useGetColorThemes";
@@ -19,7 +18,7 @@ export const HomeScreen = ({ navigation } : StackHeaderProps) => {
     },[])
 
     return (
-        <View style={[styles.container , styles.flex1]}>
+        <View style={[styles.container , styles.flex1 , styles.relative]}>
             <FlatList
                 refreshing={isRefreshing}
                 onRefresh={handleRefresh}
@@ -38,7 +37,7 @@ export const HomeScreen = ({ navigation } : StackHeaderProps) => {
                 )}
             >
             </FlatList>
-
+        <Pressable style={[styles.floatingButton , styles.absolute , {bottom : 10 , right : 10}]} onPress={()=> navigation.push("addColorPaletteModal") }><Text style={{fontSize : 20}}>Add</Text></Pressable>
         </View>
     );
 };
@@ -51,12 +50,23 @@ const styles = StyleSheet.create({
         paddingVertical : 10,
         textTransform : "capitalize"
     },
+    relative : {
+        position : "relative"
+    },
+    absolute : {
+        position : "absolute"
+    },
     flex1: {flex : 1},
     container: {
         backgroundColor: '#fff',
         justifyContent: 'center',
         padding : 10,
     },
+    floatingButton : {
+        borderRadius : 50,
+        backgroundColor : "cyan",
+        padding : 20
+    }
 })
 
 

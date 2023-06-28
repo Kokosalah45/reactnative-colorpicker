@@ -1,29 +1,38 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {StyleSheet} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import {useRef} from "react";
 import {ColorPaletteScreen} from "./screens/ColorPalette";
 import {HomeScreen} from "./screens/Home";
+import {AddColorPalette} from "./screens/AddColorPalette";
 
 export default function App() {
-  const Stack = useRef(createStackNavigator()).current
+  const RootStack = useRef(createStackNavigator()).current
   return (
       <NavigationContainer>
-          <Stack.Navigator>
-              <Stack.Screen name="Home" component={HomeScreen} />
-              <Stack.Screen name="ColorPalette" component={ColorPaletteScreen} options={({ route }) => ({ title: "" })} />
-          </Stack.Navigator>
+          <RootStack.Navigator>
+              <RootStack.Group>
+                  <RootStack.Screen  options={{ headerShown: false }} name="Main"  component={MainStack} />
+              </RootStack.Group>
+              <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+                  <RootStack.Screen name="addColorPaletteModal" component={AddColorPalette} options={()=> ({title : "Add Color Palette"})} />
+              </RootStack.Group>
+          </RootStack.Navigator>
       </NavigationContainer>
 
   );
 }
 
-const styles = StyleSheet.create({
-  flex1: {flex : 1},
-  container: {
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    padding : 10,
-  },
+const MainStack = () =>{
+    const MainStack = useRef(createStackNavigator()).current
 
-});
+    return (
+        <MainStack.Navigator>
+            <MainStack.Screen name="Home" component={HomeScreen} />
+            <MainStack.Screen name="ColorPalette" component={ColorPaletteScreen} options={({ route }) => ({ title: "" })} />
+        </MainStack.Navigator>
+    )
+}
+
+
+
