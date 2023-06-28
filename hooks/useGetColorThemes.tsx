@@ -28,5 +28,5 @@ export default  function useGetColorThemes(id? : string){
 
     useEffect(()=> {void fetchColorThemes(id)}, [])
 
-    return {colorThemes , setColorThemes}
+    return {colorThemes , setColorThemes , fetchColorThemes}
 }

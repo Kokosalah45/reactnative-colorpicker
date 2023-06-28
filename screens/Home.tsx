@@ -8,11 +8,21 @@ import useGetColorThemes from "../hooks/useGetColorThemes";
 
 export const HomeScreen = ({ navigation } : StackHeaderProps) => {
 
-    const {colorThemes , setColorThemes} = useGetColorThemes()
+    const {colorThemes , setColorThemes , fetchColorThemes} = useGetColorThemes()
+
+    const [isRefreshing , setIsRefreshing] = useState(false);
+
+    const handleRefresh = useCallback(async () =>{
+        setIsRefreshing(true)
+        await fetchColorThemes()
+        setIsRefreshing(false)
+    },[])
 
     return (
         <View style={[styles.container , styles.flex1]}>
             <FlatList
+                refreshing={isRefreshing}
+                onRefresh={handleRefresh}
                 style={styles.flex1}
                 data={Array.isArray(colorThemes) ? colorThemes : []}
                 renderItem={({item}) => (
