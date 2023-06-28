@@ -7,8 +7,8 @@ import useGetColorThemes from "../hooks/useGetColorThemes";
 
 export const HomeScreen = ({ navigation } : StackHeaderProps) => {
 
-    const {colorThemes , setColorThemes , fetchColorThemes} = useGetColorThemes()
-
+    const {colorThemes , fetchColorThemes} = useGetColorThemes()
+    console.log({colorThemes})
     const [isRefreshing , setIsRefreshing] = useState(false);
 
     const handleRefresh = useCallback(async () =>{
@@ -19,6 +19,7 @@ export const HomeScreen = ({ navigation } : StackHeaderProps) => {
 
     return (
         <View style={[styles.container , styles.flex1 , styles.relative]}>
+            {/*<Text>adsd</Text>*/}
             <FlatList
                 refreshing={isRefreshing}
                 onRefresh={handleRefresh}

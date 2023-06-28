@@ -25,7 +25,6 @@ export default function App() {
 
 const MainStack = () =>{
     const MainStack = useRef(createStackNavigator()).current
-
     return (
         <MainStack.Navigator>
             <MainStack.Screen name="Home" component={HomeScreen} />

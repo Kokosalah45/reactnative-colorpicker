@@ -7,9 +7,9 @@ interface ColorPalette {
 }
 
 
-export default  function useGetColorThemes(id? : string){
+export default function useGetColorThemes(id? : string){
     const [colorThemes , setColorThemes] = useState<ColorPalette[] | ColorPalette>([])
-    const fetchColorThemes = useCallback(async (id? : string) => {
+    const fetchColorThemes = useCallback(async () => {
         const res = await fetch('https://color-palette-api.kadikraman.vercel.app/palettes')
         if(res.ok){
             const data = await res.json() as ColorPalette[]
@@ -26,7 +26,7 @@ export default  function useGetColorThemes(id? : string){
         }
     } , [])
 
-    useEffect(()=> {void fetchColorThemes(id)}, [])
+    useEffect(()=> {void fetchColorThemes()}, [])
 
     return {colorThemes , setColorThemes , fetchColorThemes}
 }
